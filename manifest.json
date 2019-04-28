@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "Copy Cookie",
+    "version": "1.0.2",
+    "description": "An extension to copy cookies between the domains mainly for localhost.",
+    "permissions": ["cookies", "activeTab", "<all_urls>"],
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+    },
+    "author": "Avaneesh Tripathi"
+}

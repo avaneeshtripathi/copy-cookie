@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                min-width: 320px;
+                overflow-x: hidden;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+            }
+            #container {
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 6px;
+            }
+            .logoWrapper {
+                flex: 1;
+                text-align: center;
+            }
+            .logoWrapper img {
+                max-height: 77px;
+            }
+            .formWrapper1,
+            .formWrapper2 {
+                display: flex;
+                flex-direction: column;
+                display: none;
+            }
+            .container1 .formWrapper1 {
+                display: block;
+            }
+            .container2 .formWrapper2 {
+                display: block;
+            }
+            .successIcon {
+                width: 20px;
+                margin-right: 10px;
+            }
+            .successCopy {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            .successPasteLabel {
+                display: none;
+            }
+            .inputWrapper {
+                display: flex;
+                flex-direction: column;
+            }
+            .inputWrapper label {
+                font-weight: bold;
+            }
+            input[type='text'] {
+                width: 100%;
+                border: 2px solid #aaa;
+                border-radius: 4px;
+                margin: 8px 0;
+                outline: none;
+                padding: 8px;
+                box-sizing: border-box;
+                transition: 0.3s;
+            }
+            input[type='text']:focus {
+                border-color: dodgerBlue;
+                box-shadow: 0 0 8px 0 dodgerBlue;
+            }
+            .buttonWrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-left: -10px;
+            }
+            button {
+                height: 30px;
+                flex: 1;
+                margin-left: 10px;
+                background-color: #3498db;
+                border: unset;
+                border-radius: 4px;
+                text-transform: uppercase;
+                color: #fff;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #217dbb;
+            }
+        </style>
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="logoWrapper">
+                <img src="images/logo.png" />
+            </div>
+            <div class="formWrapper1">
+                <div id="successPasteLabel" class="successPasteLabel">
+                    <div class="successCopy">
+                        <img class="successIcon" src="images/success.png" />
+                        <span>Pasted Successfully!</span>
+                    </div>
+                </div>
+                <div class="buttonWrapper">
+                    <button id="copyButton">Copy</button>
+                </div>
+            </div>
+            <div class="formWrapper2">
+                <div class="successCopy">
+                    <img class="successIcon" src="images/success.png" />
+                    <span>Copied Successfully!</span>
+                </div>
+                <div class="inputWrapper">
+                    <label for="domain">Domain:</label>
+                    <input
+                        autocomplete="false"
+                        placeholder="localhost"
+                        type="text"
+                        id="domainInput"
+                        name="domain"
+                    />
+                </div>
+                <div class="buttonWrapper">
+                    <button id="pasteButton">Paste</button>
+                    <button id="resetButton">Reset</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
