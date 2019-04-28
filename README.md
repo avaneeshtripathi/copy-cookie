@@ -10,3 +10,7 @@ To load the dev version:
 2. Turn on `Developer mode`
 3. Click `Load Unpacked`
 4. Select the folder
+
+| Copy                                                                                     | Paste                                                                                    | Done                                                                                     |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| ![](https://raw.githubusercontent.com/avaneeshtripathi/copy-cookie/snapshots/step-1.png) | ![](https://raw.githubusercontent.com/avaneeshtripathi/copy-cookie/snapshots/step-2.png) | ![](https://raw.githubusercontent.com/avaneeshtripathi/copy-cookie/snapshots/step-3.png) |
