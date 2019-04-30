@@ -12,7 +12,7 @@ const onCopyButtonClick = () => {
             });
         },
     );
-    setTimeout(handlePopupUI, 200);
+    setTimeout(() => handlePopupUI('copy'), 200);
 };
 
 // When the popup Paste Button is clicked
@@ -64,17 +64,17 @@ const onPasteButtonClick = () => {
         },
     );
     setTimeout(() => {
-        if (validTabUrl) onResetButtonClick(true);
+        if (validTabUrl) onResetButtonClick('paste');
     }, 200);
 };
 
 // When the popup Reset Button is clicked
-const onResetButtonClick = pasted => {
+const onResetButtonClick = action => {
     localStorage.removeItem('aviCookieData');
-    handlePopupUI(pasted);
+    handlePopupUI(action);
 };
 
-const handlePopupUI = pasted => {
+const handlePopupUI = action => {
     const aviCookieData = localStorage.aviCookieData
         ? JSON.parse(localStorage.aviCookieData)
         : null;
@@ -87,10 +87,16 @@ const handlePopupUI = pasted => {
     }
 
     const successpasteLabel = document.getElementById('successPasteLabel');
-    if (pasted) {
+    const welcomeLabel = document.getElementById('welcomeLabel');
+    if (action === 'paste') {
         successpasteLabel.setAttribute('style', 'display: block');
     } else {
         successpasteLabel.setAttribute('style', 'display: none');
+    }
+    if (action === 'copy' || aviCookieData) {
+        welcomeLabel.setAttribute('style', 'display: none');
+    } else if (action === 'reset') {
+        welcomeLabel.setAttribute('style', 'display: block');
     }
 };
 
@@ -106,5 +112,5 @@ window.addEventListener('load', event => {
         .addEventListener('click', onPasteButtonClick);
     document
         .getElementById('resetButton')
-        .addEventListener('click', () => onResetButtonClick());
+        .addEventListener('click', () => onResetButtonClick('reset'));
 });

@@ -9,18 +9,31 @@
                 font-size: 12px;
             }
             #container {
-                min-height: 200px;
+                min-height: 210px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 padding: 6px;
+                position: relative;
+            }
+            .welcomeLabel {
+                position: absolute;
+                top: 90px;
+                left: 50%;
+                margin-left: -90px;
+                font-size: 22px;
+                font-weight: 600;
+                width: 180px;
+                text-align: center;
+                font-family: fantasy;
+                color: #544f4f;
             }
             .logoWrapper {
                 flex: 1;
                 text-align: center;
             }
             .logoWrapper img {
-                max-height: 77px;
+                max-height: 64px;
             }
             .formWrapper1,
             .formWrapper2 {
@@ -90,6 +103,18 @@
             button:hover {
                 background-color: #217dbb;
             }
+            .footer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 10px;
+                margin-top: 8px;
+                color: #756e6e;
+            }
+            .footer img {
+                width: 12px;
+                margin: 0 4px;
+            }
         </style>
         <script src="popup.js"></script>
     </head>
@@ -97,6 +122,9 @@
         <div id="container">
             <div class="logoWrapper">
                 <img src="images/logo.png" />
+            </div>
+            <div id="welcomeLabel" class="welcomeLabel">
+                Hello World!
             </div>
             <div class="formWrapper1">
                 <div id="successPasteLabel" class="successPasteLabel">
@@ -128,6 +156,10 @@
                     <button id="pasteButton">Paste</button>
                     <button id="resetButton">Reset</button>
                 </div>
+            </div>
+            <div class="footer">
+                Made with <img src="images/heart.png" /> for the world by
+                <strong>&nbsp;Avaneesh</strong>
             </div>
         </div>
     </body>
