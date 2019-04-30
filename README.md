@@ -2,7 +2,7 @@
 
 A chrome extension to copy cookies across the domains.
 
-Not published yet (awaiting review by google).
+Link: [Webstore Url](https://chrome.google.com/webstore/detail/efgblkeenphclkonjikaanjnlconlkfp).
 
 To load the dev version:
 
