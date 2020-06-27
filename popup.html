@@ -7,14 +7,26 @@
                 overflow-x: hidden;
                 font-family: Arial, sans-serif;
                 font-size: 12px;
+                margin: 0;
             }
             #container {
                 min-height: 210px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                padding: 6px;
+                padding: 14px;
                 position: relative;
+            }
+            #loader {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.2);
+                display: none;
+                align-items: center;
+                justify-content: center;
             }
             .welcomeLabel {
                 position: absolute;
@@ -129,6 +141,9 @@
     </head>
     <body>
         <div id="container">
+            <div id="loader">
+                <img src="images/spin.svg" />
+            </div>
             <div class="logoWrapper">
                 <img src="images/logo.png" />
             </div>
