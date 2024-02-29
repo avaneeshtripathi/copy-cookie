@@ -1,3 +1,21 @@
+const input = document.getElementById('domainInput');
+
+(async function initPopupWindow() {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  if (tab?.url) {
+    try {
+      let url = new URL(tab.url);
+      input.value = url.hostname;
+    } catch(e) {
+      alert(e);
+      // ignore
+    }
+  }
+
+  input.focus();
+})();
+
 // When the popup Paste Button is clicked
 const onCopyButtonClick = () => {
     chrome.tabs.query(
@@ -10,6 +28,32 @@ const onCopyButtonClick = () => {
             chrome.cookies.getAll({ url: tab[0].url }, cookie => {
                 localStorage.copyCookieData = JSON.stringify(cookie);
                 setTimeout(() => handlePopupUI('copy'), 100);
+            });
+        },
+    );
+};
+
+const onCopyClipboardButtonClick = (e) => {
+    chrome.tabs.query(
+        {
+            status: 'complete',
+            windowId: chrome.windows.WINDOW_ID_CURRENT,
+            active: true,
+        },
+        tab => {
+            chrome.cookies.getAll({ url: tab[0].url }, cookie => {
+                const cookieString = cookie.map(o => `${o.name}=${o.value}`).join(';');
+                const el = document.createElement('textarea')
+                el.value = cookieString;
+                document.body.append(el);
+                // Select the text and copy to clipboard
+                el.select();
+                document.execCommand('copy', true);
+                el.remove();
+                
+                const text = e.target.innerText;
+                e.target.innerText = 'Success';
+                setTimeout(() => e.target.innerText = text, 1000);
             });
         },
     );
@@ -42,7 +86,7 @@ const onPasteButtonClick = async () => {
     if (!copyCookieData)
         return alert('Uh-Oh! You need to copy the cookies first.');
 
-    let domain = document.getElementById('domainInput').value.trim();
+    let domain = input.value.trim();
     if (!domain) domain = 'localhost';
 
     chrome.tabs.query(
@@ -58,13 +102,15 @@ const onPasteButtonClick = async () => {
 
             chrome.cookies.getAll({ url: tab[0].url }, cookies => {
                 removeOldCookies(cookies, 0, tab[0].url, () => {
-                    copyCookieData.forEach(({ name, value, path }) => {
+                    copyCookieData.forEach(({ name, value, path, httpOnly, secure }) => {
                         try {
                             chrome.cookies.set({
                                 url: tab[0].url,
+                                secure,
                                 name,
                                 value,
                                 path,
+                                httpOnly,
                                 domain,
                             });
                         } catch (error) {
@@ -116,6 +162,9 @@ window.addEventListener('load', () => {
     document
         .getElementById('copyButton')
         .addEventListener('click', onCopyButtonClick);
+    document
+        .getElementById('copyToClipboard')
+        .addEventListener('click', onCopyClipboardButtonClick);
     document
         .getElementById('pasteButton')
         .addEventListener('click', onPasteButtonClick);
